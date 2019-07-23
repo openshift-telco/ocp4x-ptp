@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -m
+
+## Precision Time Protocol (PTP) service
+#/usr/sbin/ptp4l -f /etc/ptp4l.conf -i eth0
+
+## Synchronize system clock or PTP hardware clock (PHC)
+#/usr/sbin/phc2sys -a -r
+
+RUNBG=
+
+usage() {
+    echo -e "Usage: $0 [ ptp4l | phc2sys | all ] or Set environment variable \$PTP_RUN"
+}
+
+start_ptp4l() {
+  if [[ -n "${PTP4L_OPTIONS}" ]]; then
+    $RUNBG /usr/sbin/ptp4l -f /etc/ptp4l.conf -m ${PTP4L_OPTIONS}
+  else
+    $RUNBG /usr/sbin/ptp4l -f /etc/ptp4l.conf -m -S -i eth0
+  fi
+}
+
+start_phc2sys() {
+  if [[ -n "${PHC2SYS_OPTIONS}" ]]; then
+    /usr/sbin/phc2sys ${PHC2SYS_OPTIONS}
+  else
+    /usr/sbin/phc2sys -m -a -r
+  fi
+}
+
+if [[ -n "${PTP_RUN}" ]]; then
+  key="${PTP_RUN}"
+else
+  # Capture First param
+  key="$1"
+fi
+
+case $key in
+    ptp4l)
+        start_ptp4l
+        ;;
+    phc2sys)
+        start_phc2sys
+        ;;
+    all)
+        RUNBG="nohup"
+        start_ptp4l
+        start_phc2sys
+        ;;
+    *)
+        usage
+        ;;
+esac
