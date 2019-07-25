@@ -4,10 +4,11 @@ Linuxptp is an implementation of the Precision Time Protocol (PTP) according to 
 
 ## Installing
 
-- Build DaemonSet Container
-```
-podman build -t bastion.example.com:5000/ocp4x/ptp:4.1 -f Dockerfile.ubi
-```
+- Build DaemonSet Container and upload to local container repo
+    ```
+    podman build -t bastion.example.com:5000/ocp4x/ptp:4.1 -f Dockerfile.ubi
+    podman push bastion.example.com:5000/ocp4x/ptp:4.1
+    ```
 
 - Create namespace and RBACs
     ```
@@ -15,7 +16,7 @@ podman build -t bastion.example.com:5000/ocp4x/ptp:4.1 -f Dockerfile.ubi
     oc create -f ./assets/manifests/002_rbac.yaml
     ```
 
-- Update and Deploy DaemonSet
+- Update DaemonSet ConfigMap and Deploy DaemonSet
     ```
     # Edit ConfigMap
     vi ./assets/manifests/03_daemonset.yaml
