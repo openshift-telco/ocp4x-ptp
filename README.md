@@ -4,6 +4,12 @@ Linuxptp is an implementation of the Precision Time Protocol (PTP) according to 
 
 ## Installing
 
+- Apply MachineConfig to load `ptp` Kernel module
+    ```
+    # Note: Update to match the worker type. By default using 'worker-rt'
+    oc create -f ./assets/manifests/00_98-worker-rt-ptp.yaml
+    ```
+
 - Build DaemonSet Container and upload to local container repo
     ```
     podman build -t bastion.example.com:5000/ocp4x/ptp:4.1 -f Dockerfile.ubi
@@ -18,7 +24,8 @@ Linuxptp is an implementation of the Precision Time Protocol (PTP) according to 
 
 - Update DaemonSet ConfigMap and Deploy DaemonSet
     ```
-    # Edit ConfigMap
+    # Edit ConfigMap with the required options
+    # For valid options -- https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sec-using_ptp
     vi ./assets/manifests/03_daemonset.yaml
     oc create -f ./assets/manifests/03_daemonset.yaml
     ```
