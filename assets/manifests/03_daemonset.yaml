@@ -37,6 +37,7 @@ spec:
 
       containers:
       - name: ocp4x-ptp
+        #image: quay.io/redhat/ptp
         image: bastion.example.com:5000/ocp4x/ptp:4.1
         command:
         - "/ptp-run"
