@@ -10,9 +10,19 @@ Linuxptp is an implementation of the Precision Time Protocol (PTP) according to 
     oc create -f ./assets/manifests/00_98-worker-rt-ptp.yaml
     ```
 
-- Build DaemonSet Container and upload to local container repo
+- Build or download the DaemonSet Container and upload to local container repo
+    To build the image:
     ```
+    # NOTE: When using the UBI image a RHEL node with valid subscription is required for the linuxptp package
+    # if not in a RHEL node, use the Dockerfile.fedora can be used.
     podman build -t bastion.example.com:5000/ocp4x/ptp:4.1 -f Dockerfile.ubi
+    podman push bastion.example.com:5000/ocp4x/ptp:4.1
+    ```
+    
+    To download the image:
+    ```
+    podman pull quay.io/redhat/ptp
+    podman tag quay.io/redhat/ptp bastion.example.com:5000/ocp4x/ptp:4.1
     podman push bastion.example.com:5000/ocp4x/ptp:4.1
     ```
 

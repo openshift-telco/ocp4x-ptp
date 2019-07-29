@@ -1,16 +1,10 @@
-FROM registry.access.redhat.com/ubi8/ubi
+FROM quay.io/fedora/fedora:31-x86_64
 ENV APP_ROOT=/
 ENV PATH=${APP_ROOT}:${PATH}
 ENV HOME=${APP_ROOT}
 WORKDIR ${APP_ROOT}
 
 COPY ./assets/bin/ptp-run ${APP_ROOT} 
-
-# NOTE: When using local repo
-#RUN dnf install -y  http://198.18.100.1:8000/rhel8/AppStream/Packages/linuxptp-2.0-2.el8.x86_64.rpm \
-#    http://198.18.100.1:8000/rhel8/BaseOS/Packages/iproute-4.18.0-11.el8.x86_64.rpm && \
-#    dnf clean all && \
-#    rm -rf /var/cache/dnf
 
 # NOTE: REQUIRES a registered RHEL host to find the linuxptp package
 RUN dnf install --nodocs -y linuxptp && \
