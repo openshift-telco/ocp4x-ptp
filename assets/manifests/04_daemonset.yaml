@@ -88,13 +88,13 @@ spec:
         - mountPath: /sbin/chronyd
           name: host-sbin-chronyd
           readOnly: true
-         - mountPath: /usr/sbin/ntpd
+        - mountPath: /usr/sbin/ntpd
           name: host-usr-sbin-ntpd
           readOnly: true         
           # to run commands chroot in to the host
-          - mountPath: /host
-            name: host-slash
-            readOnly: true
+        - mountPath: /host
+          name: host-slash
+          readOnly: true
       volumes:
         - name: config
           configMap:

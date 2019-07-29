@@ -29,15 +29,16 @@ Linuxptp is an implementation of the Precision Time Protocol (PTP) according to 
 - Create namespace and RBACs
     ```
     oc create -f ./assets/manifests/01_namespace.yaml
-    oc create -f ./assets/manifests/002_rbac.yaml
+    oc create -f ./assets/manifests/02_serviceaccount.yaml
+    oc create -f ./assets/manifests/03_rbac.yaml
     ```
 
 - Update DaemonSet ConfigMap and Deploy DaemonSet
     ```
     # Edit ConfigMap with the required options
     # For valid options -- https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sec-using_ptp
-    vi ./assets/manifests/03_daemonset.yaml
-    oc create -f ./assets/manifests/03_daemonset.yaml
+    vi ./assets/manifests/04_daemonset.yaml
+    oc create -f ./assets/manifests/04_daemonset.yaml
     ```
 
 - Testing PTP sync - in one of the nodes execute
