@@ -10,7 +10,7 @@ data:
     PHC2SYS.OPTIONS="-m -a -r"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: ocp4x-ptp
   namespace: ocp4x-ptp
