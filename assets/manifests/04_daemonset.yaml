@@ -4,13 +4,12 @@ metadata:
   namespace: ocp4x-ptp
   name: ptp-config
 data:
-  ptp.config: |
-    #Nothing here
-    PTP4L.OPTIONS="-m -S -i eth0"
-    PHC2SYS.OPTIONS="-m -a -r"
+  # Adapt the interface name to your hosts
+  PTP4L.OPTIONS: "-m -S -i eth0"
+  PHC2SYS.OPTIONS: "-m -a -r"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: ocp4x-ptp
   namespace: ocp4x-ptp
