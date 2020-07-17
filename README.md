@@ -1,3 +1,7 @@
+```
+THIS IS NOT LONGER NEEDED. NATIVE SUPPROT EXISTS IN THE PLATFORM
+```
+
 # OCP 4.x support for PTP
 
 Linuxptp is an implementation of the Precision Time Protocol (PTP) according to IEEE standard 1588v2 for Linux. This is a DaemonSet to support PTP in OCP4.x.
